@@ -73,3 +73,124 @@
 #include <cmath>
 using namespace std;
 
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b, bool &success) {
+    if (b == 0) {
+        success = false;
+        return 0;
+    }
+
+    success = true;
+    return a / b;
+}
+
+double modulus(double a, double b, bool &success) {
+    if (b == 0) {
+        success = false;
+        return 0;
+    }
+
+    success = true;
+    return fmod(a, b);
+}
+
+double exponent(double base, double exp) {
+    return pow(base, exp);
+}
+
+void getTwoNumbers(double &a, double &b) {
+    cout << "Enter first number : ";
+    cin >> a;
+    cout << "Enter second number: ";
+    cin >> b;
+}
+
+void printMenu() {
+    cout << endl;
+    cout << "============================" << endl;
+    cout << "     SIMPLE CALCULATOR" << endl;
+    cout << "============================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+    cout << "Select an operation (1-7): ";
+}
+
+int main() {
+    int choice;
+    bool running = true;
+
+    cout << fixed << setprecision(2);
+
+    while (running) {
+        printMenu();
+        cin >> choice;
+
+        if (choice >= 1 && choice <= 6) {
+            double a, b;
+            getTwoNumbers(a, b);
+
+            if (choice == 1) {
+                cout << "Result: " << a << " + " << b << " = " << add(a, b) << endl;
+
+            } else if (choice == 2) {
+                cout << "Result: " << a << " - " << b << " = " << subtract(a, b) << endl;
+
+            } else if (choice == 3) {
+                cout << "Result: " << a << " * " << b << " = " << multiply(a, b) << endl;
+
+            } else if (choice == 4) {
+                bool success;
+                double result = divide(a, b, success);
+
+                if (success) {
+                    cout << "Result: " << a << " / " << b << " = " << result << endl;
+                } else {
+                    cout << "Error: Cannot divide by zero." << endl;
+                }
+
+            } else if (choice == 5) {
+                bool success;
+                double result = modulus(a, b, success);
+
+                if (success) {
+                    cout << "Result: " << a << " % " << b << " = " << result << endl;
+                } else {
+                    cout << "Error: Cannot divide by zero." << endl;
+                }
+
+            } else if (choice == 6) {
+                cout << "Result: " << a << " ^ " << b << " = " << exponent(a, b) << endl;
+            }
+
+        } else if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            running = false;
+
+        } else {
+            cout << "Error: Invalid choice. Please enter a number between 1 and 7." << endl;
+        }
+    }
+
+    return 0;
+}
